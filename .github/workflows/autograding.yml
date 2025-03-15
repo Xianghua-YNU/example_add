@@ -1,34 +1,22 @@
 name: Autograding Tests
+
 on: [push]
 
 jobs:
-  autograding:
-    name: Run Pytest Autograder
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Checkout student's submitted code
-      - uses: actions/checkout@v4
-      
-      # Step 2: Setup Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-      
-      # Step 3: Install pytest
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest
-      
-      # Step 4: Run pytest and generate results
-      - name: Run pytest
-        run: |
-          pytest tests/ --junitxml=results.xml
-      
-      # Step 5: Upload results to GitHub Classroom Autograding
-      - name: Upload Autograding Results
-        uses: classroom-resources/autograding@v1
-        with:
-          name: Pytest Autograder
-          path: results.xml
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Replace with your Python version
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+    - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV  # Add current directory to PYTHONPATH
+    - name: Run tests
+      run: pytest
