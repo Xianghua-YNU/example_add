@@ -2,8 +2,8 @@
 
 def add(a, b):
     # TODO: implement function
-    pass
+    return a+b
 
 def subtract(a, b):
     # TODO: implement function
-    pass
+    return a-b
