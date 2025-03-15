@@ -28,7 +28,7 @@ jobs:
       
       # Step 5: Upload results to GitHub Classroom Autograding
       - name: Upload Autograding Results
-        uses: classroom-resources/autograding@v2
+        uses: classroom-resources/autograding@v1
         with:
           name: Pytest Autograder
           path: results.xml
